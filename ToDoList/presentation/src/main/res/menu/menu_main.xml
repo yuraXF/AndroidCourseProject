@@ -2,6 +2,22 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     tools:context="com.example.yura.todolist.mvvm.view.activity.MainActivity">
+    <item android:title="Сортировать по">
+        <menu>
+            <item
+                android:id="@+id/sort_by_priority"
+                android:title="Приоритету" />
+            <item
+                android:id="@+id/sort_by_title"
+                android:title="Заголовку" />
+            <item
+                android:id="@+id/sort_by_edit_date"
+                android:title="Дате изменения" />
+            <item
+                android:id="@+id/sort_by_end_date"
+                android:title="Дате завершения" />
+        </menu>
+    </item>
     <item
         android:id="@+id/action_exit"
         android:orderInCategory="100"

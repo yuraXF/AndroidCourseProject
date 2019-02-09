@@ -1,17 +1,14 @@
 package com.example.domain;
 
+import java.util.Date;
+
 public class Note {
     private String noteId;
     private int priority;
     private String title;
     private String description;
-
-    public Note(String noteId, int priority, String title, String description) {
-        this.noteId = noteId;
-        this.priority = priority;
-        this.title = title;
-        this.description = description;
-    }
+    private Date editDate;
+    private Date endDate;
 
     public Note(String noteId) {
         this.noteId = noteId;
@@ -47,5 +44,21 @@ public class Note {
 
     public void setNoteId(String noteId) {
         this.noteId = noteId;
+    }
+
+    public Date getEditDate() {
+        return editDate;
+    }
+
+    public void setEditDate(Date editDate) {
+        this.editDate = editDate;
+    }
+
+    public Date getEndDate() {
+        return endDate;
+    }
+
+    public void setEndDate(Date endDate) {
+        this.endDate = endDate;
     }
 }

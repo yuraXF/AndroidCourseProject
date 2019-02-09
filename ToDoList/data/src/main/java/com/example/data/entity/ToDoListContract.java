@@ -13,6 +13,8 @@ public final class ToDoListContract {
         public static final String COLUMN_TITLE="title";
         public static final String COLUMN_DESCRIPTION="description";
         public static final String COLUMN_PRIORITY="priority";
+        public static final String COLUMN_EDIT_DATE="editDate";
+        public static final String COLUMN_END_DATE="endDate";
 
     }
 }

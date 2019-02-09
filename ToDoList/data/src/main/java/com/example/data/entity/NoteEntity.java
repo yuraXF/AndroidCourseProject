@@ -5,6 +5,8 @@ public class NoteEntity {
     private int priority;
     private String title;
     private String description;
+    private String editDate;
+    private String endDate;
 
     public NoteEntity() {
     }
@@ -39,5 +41,21 @@ public class NoteEntity {
 
     public void setNoteId(String noteId) {
         this.noteId = noteId;
+    }
+
+    public String getEditDate() {
+        return editDate;
+    }
+
+    public void setEditDate(String editDate) {
+        this.editDate = editDate;
+    }
+
+    public String getEndDate() {
+        return endDate;
+    }
+
+    public void setEndDate(String endDate) {
+        this.endDate = endDate;
     }
 }

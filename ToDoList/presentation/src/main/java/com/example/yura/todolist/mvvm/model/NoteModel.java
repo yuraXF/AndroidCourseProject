@@ -5,13 +5,8 @@ public class NoteModel {
     private int priority;
     private String title;
     private String description;
-
-    public NoteModel(String noteId, int priority, String title, String description) {
-        this.noteId = noteId;
-        this.priority = priority;
-        this.title = title;
-        this.description = description;
-    }
+    private String editDate;
+    private String endDate;
 
     public NoteModel(String noteId) {
         this.noteId = noteId;
@@ -47,5 +42,21 @@ public class NoteModel {
 
     public void setNoteId(String noteId) {
         this.noteId = noteId;
+    }
+
+    public String getEditDate() {
+        return editDate;
+    }
+
+    public void setEditDate(String editDate) {
+        this.editDate = editDate;
+    }
+
+    public String getEndDate() {
+        return endDate;
+    }
+
+    public void setEndDate(String endDate) {
+        this.endDate = endDate;
     }
 }

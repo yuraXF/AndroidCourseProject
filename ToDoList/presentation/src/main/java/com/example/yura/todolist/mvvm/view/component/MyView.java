@@ -1,6 +1,7 @@
 package com.example.yura.todolist.mvvm.view.component;
 
 import android.content.Context;
+import android.content.res.TypedArray;
 import android.util.AttributeSet;
 
 import com.example.yura.todolist.PriorityTypeEnum;
@@ -20,6 +21,10 @@ public class MyView extends AppCompatTextView {
 
     public MyView(Context context, AttributeSet attrs) {
         super(context, attrs);
+        TypedArray typedArray=getContext().obtainStyledAttributes(attrs,R.styleable.MyView);
+        Integer priority=typedArray.getInt(R.styleable.MyView_priority,PriorityTypeEnum.LOW.ordinal());
+        typedArray.recycle();
+        setPriorityBackground(priority);
     }
 
     public void setPriorityBackground(int priorityType){
@@ -31,4 +36,5 @@ public class MyView extends AppCompatTextView {
             setBackgroundResource(R.drawable.ic_filter_3_black_24dp);
         }
     }
+
 }
