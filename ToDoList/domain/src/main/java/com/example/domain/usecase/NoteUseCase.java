@@ -8,11 +8,14 @@ import com.example.domain.repository.NotesRepository;
 import java.text.ParseException;
 import java.util.ArrayList;
 
+import javax.inject.Inject;
+
 public class NoteUseCase {
 
     private NotesRepository notesRepository;
     private SortOperations sortOperations;
 
+    @Inject
     public NoteUseCase(NotesRepository notesRepository) {
         this.notesRepository = notesRepository;
         sortOperations=new SortOperations();

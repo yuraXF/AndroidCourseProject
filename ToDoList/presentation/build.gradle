@@ -16,6 +16,17 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
+
+    /*flavorDimensions "datastorage"
+    productFlavors {
+        sqlite {
+            dimension "datastorage"
+        }
+        firebase {
+            dimension "datastorage"
+        }
+    }*/
+
     dataBinding {
         enabled = true
     }
@@ -27,19 +38,20 @@ dependencies {
     implementation 'androidx.constraintlayout:constraintlayout:2.0.0-alpha3'
     implementation 'com.android.support.constraint:constraint-layout:1.1.2'
     implementation 'com.google.android.material:material:1.1.0-alpha02'
-    //implementation 'com.google.code.gson:gson:2.8.2'
 
     implementation 'androidx.lifecycle:lifecycle-viewmodel:2.0.0'
     implementation 'androidx.lifecycle:lifecycle-livedata:2.0.0'
     implementation 'androidx.lifecycle:lifecycle-extensions:2.0.0'
 
-    //implementation 'com.jakewharton:butterknife:8.6.0'
-    //annotationProcessor 'com.jakewharton:butterknife-compiler:8.6.0'
+    annotationProcessor 'com.google.dagger:dagger-compiler:2.16'
+    annotationProcessor 'com.google.dagger:dagger-android-processor:2.16'
 
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'androidx.test:runner:1.1.1'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.1.1'
 
+    //sqliteImplementation project(':data_sqlite')
+    //firebaseImplementation project(':data_firebase')
     implementation project(':domain')
     implementation project(':data')
 }

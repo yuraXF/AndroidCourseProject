@@ -1,35 +1,36 @@
-package com.example.data.repository;
+package com.example.data_sqlite;
 
 import android.content.ContentValues;
 import android.content.Context;
-import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
 import com.example.data.entity.NoteEntity;
 import com.example.data.entity.ToDoListContract;
-import com.example.data.entity.mapper.DateMapper;
 import com.example.data.entity.mapper.NoteEntityDataMapper;
+import com.example.data.repository.DatabaseHelper;
 import com.example.domain.Note;
 import com.example.domain.repository.NotesRepository;
 
 import java.text.ParseException;
 import java.util.ArrayList;
 
+import javax.inject.Inject;
+
 public class NoteRepositoryImpl implements NotesRepository {
-    private SharedPreferences sharedPreferences;
-    private static final String NOTE_LIST="NOTE_LIST";
     private Context context;
     private NoteEntityDataMapper noteEntityDataMapper;
+    private DatabaseHelper databaseHelper;
 
+    @Inject
     public NoteRepositoryImpl(Context context) {
         this.context = context;
         noteEntityDataMapper=new NoteEntityDataMapper();
+        databaseHelper=new DatabaseHelper(context);
     }
 
     @Override
     public ArrayList<Note> getNotes() throws ParseException {
-        DatabaseHelper databaseHelper=new DatabaseHelper(context);
         SQLiteDatabase database=databaseHelper.getReadableDatabase();
         Cursor cursor = database.query(ToDoListContract.SqliteNoteEntity.TABLE_NAME,null,null,null,null,null,ToDoListContract.SqliteNoteEntity.COLUMN_PRIORITY);
         int idColumnIndex = cursor.getColumnIndex(ToDoListContract.SqliteNoteEntity.COLUMN_ID);
@@ -56,7 +57,6 @@ public class NoteRepositoryImpl implements NotesRepository {
     @Override
     public void addNote(Note note) {
         NoteEntity noteEntity=noteEntityDataMapper.transformTo(note);
-        DatabaseHelper databaseHelper=new DatabaseHelper(context);
         SQLiteDatabase database=databaseHelper.getWritableDatabase();
         ContentValues values = new ContentValues();
         values.put(ToDoListContract.SqliteNoteEntity.COLUMN_ID, noteEntity.getNoteId());
@@ -70,7 +70,6 @@ public class NoteRepositoryImpl implements NotesRepository {
 
     @Override
     public void removeNote(String id) {
-        DatabaseHelper databaseHelper=new DatabaseHelper(context);
         SQLiteDatabase database=databaseHelper.getWritableDatabase();
         database.delete(ToDoListContract.SqliteNoteEntity.TABLE_NAME,ToDoListContract.SqliteNoteEntity.COLUMN_ID+"=?",new String[]{id});
     }
@@ -78,7 +77,6 @@ public class NoteRepositoryImpl implements NotesRepository {
    @Override
    public void editNote(Note note) {
        NoteEntity noteEntity=noteEntityDataMapper.transformTo(note);
-       DatabaseHelper databaseHelper = new DatabaseHelper(context);
        SQLiteDatabase database = databaseHelper.getWritableDatabase();
        ContentValues values = new ContentValues();
        values.put(ToDoListContract.SqliteNoteEntity.COLUMN_TITLE, noteEntity.getTitle());
@@ -91,7 +89,6 @@ public class NoteRepositoryImpl implements NotesRepository {
 
     @Override
     public Note getNoteById(String id) throws ParseException {
-        DatabaseHelper databaseHelper=new DatabaseHelper(context);
         SQLiteDatabase database=databaseHelper.getReadableDatabase();
         Cursor cursor = database.query(ToDoListContract.SqliteNoteEntity.TABLE_NAME,null,ToDoListContract.SqliteNoteEntity.COLUMN_ID+"=?",new String[]{id},null,null,null);
         cursor.moveToNext();

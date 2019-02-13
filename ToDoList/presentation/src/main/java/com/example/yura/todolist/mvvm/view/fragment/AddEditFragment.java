@@ -5,7 +5,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.example.data.repository.NoteRepositoryImpl;
+import com.example.data_sqlite.NoteRepositoryImpl;
 import com.example.domain.repository.NotesRepository;
 import com.example.yura.todolist.R;
 import com.example.yura.todolist.databinding.AddEditNoteFragmentBinding;
@@ -15,14 +15,17 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.text.ParseException;
 
+import javax.inject.Inject;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.databinding.DataBindingUtil;
-import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProviders;
+import dagger.android.support.DaggerFragment;
 
-public class AddEditFragment extends Fragment {
+public class AddEditFragment extends DaggerFragment {
 
+    @Inject
     private NotesRepository notesRepository;
     private AddEditNoteViewModel addEditNoteViewModel;
     private AddEditViewModelFactory addEditViewModelFactory;
@@ -35,7 +38,7 @@ public class AddEditFragment extends Fragment {
         super.onCreate(savedInstanceState);
 
         current_id = getArguments().getString(NOTE_ID);
-        notesRepository = new NoteRepositoryImpl(getContext());
+        //notesRepository = new NoteRepositoryImpl(getContext());
         try {
             addEditNoteViewModel = new AddEditNoteViewModel(notesRepository,current_id);
         } catch (ParseException e) {

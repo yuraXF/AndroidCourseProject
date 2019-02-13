@@ -7,12 +7,11 @@ import android.view.MenuItem;
 import com.example.yura.todolist.R;
 import com.example.yura.todolist.mvvm.view.fragment.ShowNoteFragment;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
+import dagger.android.support.DaggerAppCompatActivity;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends DaggerAppCompatActivity {
 
     private ShowNoteFragment showNoteFragment;
     private FragmentManager fragmentManager;
@@ -31,32 +30,6 @@ public class MainActivity extends AppCompatActivity {
             fragmentTransaction.commit();
         }
 
-        /*Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        toolbar.setTitle("To Do List");
-        setSupportActionBar(toolbar);*/
-
     }
-
-    //@Override
-    /*public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.menu_main, menu);
-        return true;
-    }*/
-
-    //@Override
-    /*public boolean onOptionsItemSelected(MenuItem item) {
-        int id = item.getItemId();
-        switch (id){
-            case R.id.sort_by_priority:
-                finish();
-                break;
-            case R.id.action_exit:
-                finish();
-                break;
-            default: break;
-        }
-
-        return super.onOptionsItemSelected(item);
-    }*/
 
 }

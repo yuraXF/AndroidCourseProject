@@ -9,17 +9,20 @@ import com.example.yura.todolist.mvvm.model.mapper.NoteModelDataMapper;
 import java.text.ParseException;
 import java.util.List;
 
+import javax.inject.Inject;
+
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
 public class MainScreenViewModel extends ViewModel {
 
     public final MutableLiveData<List<NoteModel>> notes=new MutableLiveData<>();
-    private final NoteUseCase noteUseCase;
+    @Inject
+    NoteUseCase noteUseCase;
     private SortType sortTypeValue;
 
     public MainScreenViewModel(NotesRepository notesRepository) throws ParseException {
-        noteUseCase = new NoteUseCase(notesRepository);
+        //noteUseCase = new NoteUseCase(notesRepository);
         sortTypeValue=SortType.PRIORITY;
         attachNotes();
     }

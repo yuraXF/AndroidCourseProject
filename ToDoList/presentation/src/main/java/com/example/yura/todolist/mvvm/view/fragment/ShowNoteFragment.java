@@ -6,7 +6,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.example.data.repository.NoteRepositoryImpl;
+import com.example.data_sqlite.NoteRepositoryImpl;
 import com.example.domain.SortType;
 import com.example.domain.repository.NotesRepository;
 import com.example.yura.todolist.R;
@@ -20,24 +20,26 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.text.ParseException;
 
+import javax.inject.Inject;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.databinding.DataBindingUtil;
-import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import dagger.android.support.DaggerFragment;
 
-public class ShowNoteFragment extends Fragment implements MyAdapter.Callback {
+public class ShowNoteFragment extends DaggerFragment implements MyAdapter.Callback {
 
     private RecyclerView recyclerView;
     private static MyAdapter myAdapter;
     private LinearLayoutManager llm;
-    private NotesRepository notesRepository;
+    @Inject
+    NotesRepository notesRepository;
     private MainScreenViewModel mainScreenViewModel;
     private MainScreenViewModelFactory mainScreenViewModelFactory;
 
@@ -51,7 +53,7 @@ public class ShowNoteFragment extends Fragment implements MyAdapter.Callback {
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        notesRepository = new NoteRepositoryImpl(getContext());
+        //notesRepository = new NoteRepositoryImpl(getContext());
         try {
             mainScreenViewModel = new MainScreenViewModel(notesRepository);
         } catch (ParseException e) {
@@ -89,7 +91,7 @@ public class ShowNoteFragment extends Fragment implements MyAdapter.Callback {
         });
 
         Toolbar toolbar = (Toolbar) view.findViewById(R.id.toolbar);
-        toolbar.setTitle("To Do List");
+        toolbar.setTitle("Список заметок");
         toolbar.inflateMenu(R.menu.menu_main);
         toolbar.setOnMenuItemClickListener(new Toolbar.OnMenuItemClickListener() {
             @Override
@@ -97,32 +99,16 @@ public class ShowNoteFragment extends Fragment implements MyAdapter.Callback {
                 int id = item.getItemId();
                 switch (id){
                     case R.id.sort_by_priority:
-                        try {
-                            mainScreenViewModel.setSortTypeValue(SortType.PRIORITY);
-                        } catch (ParseException e) {
-                            e.printStackTrace();
-                        }
+                        sortByType(SortType.PRIORITY);
                         break;
                     case R.id.sort_by_title:
-                        try {
-                            mainScreenViewModel.setSortTypeValue(SortType.TITLE);
-                        } catch (ParseException e) {
-                            e.printStackTrace();
-                        }
+                        sortByType(SortType.TITLE);
                         break;
                     case R.id.sort_by_edit_date:
-                        try {
-                            mainScreenViewModel.setSortTypeValue(SortType.EDIT_DATE);
-                        } catch (ParseException e) {
-                            e.printStackTrace();
-                        }
+                        sortByType(SortType.EDIT_DATE);
                         break;
                     case R.id.sort_by_end_date:
-                        try {
-                            mainScreenViewModel.setSortTypeValue(SortType.END_DATE);
-                        } catch (ParseException e) {
-                            e.printStackTrace();
-                        }
+                        sortByType(SortType.END_DATE);
                         break;
                     case R.id.action_exit:
                         getActivity().finish();
@@ -133,7 +119,6 @@ public class ShowNoteFragment extends Fragment implements MyAdapter.Callback {
                 return false;
             }
         });
-        //((AppCompatActivity) getActivity()).setSupportActionBar(toolbar);
 
         return view;
     }
@@ -161,5 +146,13 @@ public class ShowNoteFragment extends Fragment implements MyAdapter.Callback {
     @Override
     public void deleteCurrentNote(NoteModel noteModel) throws ParseException {
         mainScreenViewModel.removeNote(noteModel.getNoteId());
+    }
+
+    private void sortByType(SortType sortType){
+        try {
+            mainScreenViewModel.setSortTypeValue(sortType);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
     }
 }
