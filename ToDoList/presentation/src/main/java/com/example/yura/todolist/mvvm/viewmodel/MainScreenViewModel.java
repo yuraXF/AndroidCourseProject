@@ -1,7 +1,6 @@
 package com.example.yura.todolist.mvvm.viewmodel;
 
 import com.example.domain.SortType;
-import com.example.domain.repository.NotesRepository;
 import com.example.domain.usecase.NoteUseCase;
 import com.example.yura.todolist.mvvm.model.NoteModel;
 import com.example.yura.todolist.mvvm.model.mapper.NoteModelDataMapper;
@@ -16,19 +15,25 @@ import androidx.lifecycle.ViewModel;
 
 public class MainScreenViewModel extends ViewModel {
 
-    public final MutableLiveData<List<NoteModel>> notes=new MutableLiveData<>();
-    @Inject
+    public final MutableLiveData<List<NoteModel>> notes = new MutableLiveData<>();
+
     NoteUseCase noteUseCase;
     private SortType sortTypeValue;
 
-    public MainScreenViewModel(NotesRepository notesRepository) throws ParseException {
-        //noteUseCase = new NoteUseCase(notesRepository);
-        sortTypeValue=SortType.PRIORITY;
+
+    @Inject
+    public MainScreenViewModel(NoteUseCase noteUseCase) {
+        this.noteUseCase = noteUseCase;
+        sortTypeValue = SortType.PRIORITY;
         attachNotes();
     }
 
-    public void attachNotes() throws ParseException {
-        notes.postValue((List<NoteModel>) new NoteModelDataMapper().transformTo(noteUseCase.getNotes(sortTypeValue)));
+    public void attachNotes()  {
+        try {
+            notes.postValue((List<NoteModel>) new NoteModelDataMapper().transformTo(noteUseCase.getNotes(sortTypeValue)));
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
     }
 
     public void removeNote(String id) throws ParseException {
@@ -45,7 +50,7 @@ public class MainScreenViewModel extends ViewModel {
     }
 
     public void setSortTypeValue(SortType sortType) throws ParseException {
-        this.sortTypeValue=sortType;
+        this.sortTypeValue = sortType;
         attachNotes();
     }
 

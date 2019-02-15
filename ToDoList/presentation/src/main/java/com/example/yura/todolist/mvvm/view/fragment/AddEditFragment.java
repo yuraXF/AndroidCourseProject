@@ -5,7 +5,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.example.data_sqlite.NoteRepositoryImpl;
 import com.example.domain.repository.NotesRepository;
 import com.example.yura.todolist.R;
 import com.example.yura.todolist.databinding.AddEditNoteFragmentBinding;
@@ -26,7 +25,7 @@ import dagger.android.support.DaggerFragment;
 public class AddEditFragment extends DaggerFragment {
 
     @Inject
-    private NotesRepository notesRepository;
+    public NotesRepository notesRepository;
     private AddEditNoteViewModel addEditNoteViewModel;
     private AddEditViewModelFactory addEditViewModelFactory;
 
