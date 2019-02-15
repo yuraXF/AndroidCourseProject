@@ -6,16 +6,14 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.example.data_sqlite.NoteRepositoryImpl;
 import com.example.domain.SortType;
-import com.example.domain.repository.NotesRepository;
 import com.example.yura.todolist.R;
 import com.example.yura.todolist.databinding.ShowNoteFragmentBinding;
 import com.example.yura.todolist.mvvm.model.NoteModel;
 import com.example.yura.todolist.mvvm.view.adapter.MyAdapter;
 import com.example.yura.todolist.mvvm.viewmodel.AddEditNoteViewModel;
 import com.example.yura.todolist.mvvm.viewmodel.MainScreenViewModel;
-import com.example.yura.todolist.mvvm.viewmodel.MainScreenViewModelFactory;
+import com.example.yura.todolist.mvvm.viewmodel.ViewModelFactory;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.text.ParseException;
@@ -38,10 +36,7 @@ public class ShowNoteFragment extends DaggerFragment implements MyAdapter.Callba
     private RecyclerView recyclerView;
     private static MyAdapter myAdapter;
     private LinearLayoutManager llm;
-    @Inject
-    NotesRepository notesRepository;
-    private MainScreenViewModel mainScreenViewModel;
-    private MainScreenViewModelFactory mainScreenViewModelFactory;
+
 
     private AddEditNoteViewModel addEditNoteViewModel;
 
@@ -49,19 +44,17 @@ public class ShowNoteFragment extends DaggerFragment implements MyAdapter.Callba
     private FragmentManager fragmentManager;
     private FragmentTransaction fragmentTransaction;
 
+
+    @Inject
+    ViewModelFactory<MainScreenViewModel> mainScreenViewModelFactory;
+    private MainScreenViewModel mainScreenViewModel;
+
+
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        //notesRepository = new NoteRepositoryImpl(getContext());
-        try {
-            mainScreenViewModel = new MainScreenViewModel(notesRepository);
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
-        mainScreenViewModelFactory = new MainScreenViewModelFactory(mainScreenViewModel);
-        mainScreenViewModel = ViewModelProviders
-                .of(this, mainScreenViewModelFactory)
+        mainScreenViewModel = ViewModelProviders.of(this, mainScreenViewModelFactory)
                 .get(MainScreenViewModel.class);
 
     }
@@ -69,7 +62,7 @@ public class ShowNoteFragment extends DaggerFragment implements MyAdapter.Callba
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        ShowNoteFragmentBinding binding = DataBindingUtil.inflate(inflater, R.layout.show_note_fragment, container,false);
+        ShowNoteFragmentBinding binding = DataBindingUtil.inflate(inflater, R.layout.show_note_fragment, container, false);
         binding.setLifecycleOwner(this);
         binding.setVm(mainScreenViewModel);
         View view = binding.getRoot();
@@ -81,7 +74,7 @@ public class ShowNoteFragment extends DaggerFragment implements MyAdapter.Callba
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                addEditFragment=AddEditFragment.newInstance(null);
+                addEditFragment = AddEditFragment.newInstance(null);
                 fragmentManager = getActivity().getSupportFragmentManager();
                 fragmentTransaction = fragmentManager.beginTransaction();
                 fragmentTransaction.replace(R.id.fragment_layout, addEditFragment);
@@ -97,7 +90,7 @@ public class ShowNoteFragment extends DaggerFragment implements MyAdapter.Callba
             @Override
             public boolean onMenuItemClick(MenuItem item) {
                 int id = item.getItemId();
-                switch (id){
+                switch (id) {
                     case R.id.sort_by_priority:
                         sortByType(SortType.PRIORITY);
                         break;
@@ -113,7 +106,8 @@ public class ShowNoteFragment extends DaggerFragment implements MyAdapter.Callba
                     case R.id.action_exit:
                         getActivity().finish();
                         break;
-                    default: break;
+                    default:
+                        break;
                 }
 
                 return false;
@@ -135,7 +129,7 @@ public class ShowNoteFragment extends DaggerFragment implements MyAdapter.Callba
 
     @Override
     public void showEditFragment(NoteModel noteModel) {
-        addEditFragment=AddEditFragment.newInstance(noteModel.getNoteId());
+        addEditFragment = AddEditFragment.newInstance(noteModel.getNoteId());
         fragmentManager = getActivity().getSupportFragmentManager();
         fragmentTransaction = fragmentManager.beginTransaction();
         fragmentTransaction.replace(R.id.fragment_layout, addEditFragment);
@@ -148,7 +142,7 @@ public class ShowNoteFragment extends DaggerFragment implements MyAdapter.Callba
         mainScreenViewModel.removeNote(noteModel.getNoteId());
     }
 
-    private void sortByType(SortType sortType){
+    private void sortByType(SortType sortType) {
         try {
             mainScreenViewModel.setSortTypeValue(sortType);
         } catch (ParseException e) {
