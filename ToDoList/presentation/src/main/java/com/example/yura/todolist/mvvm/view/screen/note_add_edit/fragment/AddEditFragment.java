@@ -5,10 +5,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-<<<<<<< HEAD:ToDoList/presentation/src/main/java/com/example/yura/todolist/mvvm/view/screen/note_add_edit/fragment/AddEditFragment.java
 import com.example.domain.exceptions.DataUnavailableException;
-=======
->>>>>>> 9620309a6d30928005ea243a7ae6927e5172252f:ToDoList/presentation/src/main/java/com/example/yura/todolist/mvvm/view/fragment/AddEditFragment.java
 import com.example.domain.repository.NotesRepository;
 import com.example.yura.todolist.R;
 import com.example.yura.todolist.databinding.AddEditNoteFragmentBinding;

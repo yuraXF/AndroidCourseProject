@@ -6,12 +6,8 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 
-<<<<<<< HEAD:ToDoList/presentation/src/main/java/com/example/yura/todolist/mvvm/view/screen/note_list/fragment/ShowNoteFragment.java
 import com.example.domain.model.SortType;
 import com.example.domain.repository.NotesRepository;
-=======
-import com.example.domain.SortType;
->>>>>>> 9620309a6d30928005ea243a7ae6927e5172252f:ToDoList/presentation/src/main/java/com/example/yura/todolist/mvvm/view/fragment/ShowNoteFragment.java
 import com.example.yura.todolist.R;
 import com.example.yura.todolist.databinding.ShowNoteFragmentBinding;
 import com.example.yura.todolist.mvvm.model.NoteModel;
@@ -19,14 +15,7 @@ import com.example.yura.todolist.mvvm.view.screen.note_list.adapter.MyAdapter;
 import com.example.yura.todolist.mvvm.view.screen.note_add_edit.fragment.AddEditFragment;
 import com.example.yura.todolist.mvvm.view.screen.statistic.fragment.StatisticFragment;
 import com.example.yura.todolist.mvvm.viewmodel.MainScreenViewModel;
-<<<<<<< HEAD:ToDoList/presentation/src/main/java/com/example/yura/todolist/mvvm/view/screen/note_list/fragment/ShowNoteFragment.java
 import com.example.yura.todolist.mvvm.viewmodel.MainScreenViewModelFactory;
-=======
-import com.example.yura.todolist.mvvm.viewmodel.ViewModelFactory;
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
-
-import java.text.ParseException;
->>>>>>> 9620309a6d30928005ea243a7ae6927e5172252f:ToDoList/presentation/src/main/java/com/example/yura/todolist/mvvm/view/fragment/ShowNoteFragment.java
 
 import javax.inject.Inject;
 
@@ -42,13 +31,8 @@ import dagger.android.support.DaggerFragment;
 public class ShowNoteFragment extends DaggerFragment implements MyAdapter.Callback {
 
     private static MyAdapter myAdapter;
-<<<<<<< HEAD:ToDoList/presentation/src/main/java/com/example/yura/todolist/mvvm/view/screen/note_list/fragment/ShowNoteFragment.java
     @Inject
     public NotesRepository notesRepository;
-=======
-    private LinearLayoutManager llm;
-
->>>>>>> 9620309a6d30928005ea243a7ae6927e5172252f:ToDoList/presentation/src/main/java/com/example/yura/todolist/mvvm/view/fragment/ShowNoteFragment.java
 
     @Inject
     MainScreenViewModelFactory mainScreenViewModelFactory;
@@ -59,26 +43,14 @@ public class ShowNoteFragment extends DaggerFragment implements MyAdapter.Callba
     private FragmentManager fragmentManager;
     private FragmentTransaction fragmentTransaction;
 
-<<<<<<< HEAD:ToDoList/presentation/src/main/java/com/example/yura/todolist/mvvm/view/screen/note_list/fragment/ShowNoteFragment.java
     private StatisticFragment statisticFragment;
-=======
-
-    @Inject
-    ViewModelFactory<MainScreenViewModel> mainScreenViewModelFactory;
-    private MainScreenViewModel mainScreenViewModel;
-
->>>>>>> 9620309a6d30928005ea243a7ae6927e5172252f:ToDoList/presentation/src/main/java/com/example/yura/todolist/mvvm/view/fragment/ShowNoteFragment.java
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-<<<<<<< HEAD:ToDoList/presentation/src/main/java/com/example/yura/todolist/mvvm/view/screen/note_list/fragment/ShowNoteFragment.java
         mainScreenViewModel = ViewModelProviders
                 .of(getActivity(), mainScreenViewModelFactory)
-=======
-        mainScreenViewModel = ViewModelProviders.of(this, mainScreenViewModelFactory)
->>>>>>> 9620309a6d30928005ea243a7ae6927e5172252f:ToDoList/presentation/src/main/java/com/example/yura/todolist/mvvm/view/fragment/ShowNoteFragment.java
                 .get(MainScreenViewModel.class);
 
     }
@@ -94,22 +66,6 @@ public class ShowNoteFragment extends DaggerFragment implements MyAdapter.Callba
         myAdapter.setCallback(this);
         binding.rvMain.setAdapter(myAdapter);
 
-<<<<<<< HEAD:ToDoList/presentation/src/main/java/com/example/yura/todolist/mvvm/view/screen/note_list/fragment/ShowNoteFragment.java
-=======
-        FloatingActionButton fab = (FloatingActionButton) view.findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                addEditFragment = AddEditFragment.newInstance(null);
-                fragmentManager = getActivity().getSupportFragmentManager();
-                fragmentTransaction = fragmentManager.beginTransaction();
-                fragmentTransaction.replace(R.id.fragment_layout, addEditFragment);
-                fragmentTransaction.addToBackStack(null);
-                fragmentTransaction.commit();
-            }
-        });
-
->>>>>>> 9620309a6d30928005ea243a7ae6927e5172252f:ToDoList/presentation/src/main/java/com/example/yura/todolist/mvvm/view/fragment/ShowNoteFragment.java
         Toolbar toolbar = (Toolbar) view.findViewById(R.id.toolbar);
         toolbar.inflateMenu(R.menu.menu_main);
         toolbar.setOnMenuItemClickListener(new Toolbar.OnMenuItemClickListener() {
@@ -168,7 +124,6 @@ public class ShowNoteFragment extends DaggerFragment implements MyAdapter.Callba
     }
 
     private void sortByType(SortType sortType) {
-<<<<<<< HEAD:ToDoList/presentation/src/main/java/com/example/yura/todolist/mvvm/view/screen/note_list/fragment/ShowNoteFragment.java
         mainScreenViewModel.setSortTypeValue(sortType);
     }
 
@@ -179,12 +134,5 @@ public class ShowNoteFragment extends DaggerFragment implements MyAdapter.Callba
         fragmentTransaction.replace(R.id.fragment_layout, statisticFragment);
         fragmentTransaction.addToBackStack(null);
         fragmentTransaction.commit();
-=======
-        try {
-            mainScreenViewModel.setSortTypeValue(sortType);
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
->>>>>>> 9620309a6d30928005ea243a7ae6927e5172252f:ToDoList/presentation/src/main/java/com/example/yura/todolist/mvvm/view/fragment/ShowNoteFragment.java
     }
 }
