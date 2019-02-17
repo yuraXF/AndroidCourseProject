@@ -15,7 +15,7 @@
             android:layout_height="wrap_content"
             android:orientation="horizontal">
 
-            <com.example.yura.todolist.mvvm.view.component.MyView
+            <com.example.yura.todolist.mvvm.view.widget.MyView
                 android:id="@+id/priority_mainscreen"
                 android:layout_width="24dp"
                 android:layout_height="24dp"

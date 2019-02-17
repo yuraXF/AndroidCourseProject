@@ -12,7 +12,7 @@ public class MyApplication extends DaggerApplication {
     protected AndroidInjector<? extends DaggerApplication> applicationInjector() {
         applicationComponent = DaggerApplicationComponent
                 .builder()
-                .setRepositoryModule(new RepositoryModule(this))
+                .context(this)
                 .build();
         return applicationComponent;
     }

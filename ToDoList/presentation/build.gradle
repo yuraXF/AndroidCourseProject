@@ -17,7 +17,7 @@ android {
         }
     }
 
-    /*flavorDimensions "datastorage"
+    flavorDimensions "datastorage"
     productFlavors {
         sqlite {
             dimension "datastorage"
@@ -25,7 +25,7 @@ android {
         firebase {
             dimension "datastorage"
         }
-    }*/
+    }
 
     dataBinding {
         enabled = true
@@ -50,8 +50,9 @@ dependencies {
     androidTestImplementation 'androidx.test:runner:1.1.1'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.1.1'
 
-    //sqliteImplementation project(':data_sqlite')
-    //firebaseImplementation project(':data_firebase')
+    sqliteImplementation project(':data_sqlite')
+    firebaseImplementation project(':data_firebase')
     implementation project(':domain')
     implementation project(':data')
+    //implementation project(':data_sqlite')
 }

@@ -5,14 +5,14 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".mvvm.view.activity.MainActivity">
+    tools:context=".mvvm.view.screen.note_list.activity.MainActivity">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/fragment_layout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         app:layout_behavior="@string/appbar_scrolling_view_behavior"
-        tools:context=".mvvm.view.activity.MainActivity"
+        tools:context=".mvvm.view.screen.note_list.activity.MainActivity"
         tools:showIn="@layout/activity_main">
 
     </androidx.constraintlayout.widget.ConstraintLayout>

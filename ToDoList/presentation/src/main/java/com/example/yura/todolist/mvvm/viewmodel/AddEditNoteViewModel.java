@@ -4,14 +4,13 @@ import android.app.DatePickerDialog;
 import android.view.View;
 import android.widget.DatePicker;
 
-import com.example.data.entity.mapper.DateMapper;
-import com.example.domain.Note;
+import com.example.data.mapper.DateMapper;
+import com.example.domain.exceptions.DataUnavailableException;
 import com.example.domain.repository.NotesRepository;
-import com.example.yura.todolist.PriorityTypeEnum;
+import com.example.yura.todolist.mvvm.view.widget.PriorityTypeEnum;
 import com.example.yura.todolist.mvvm.model.NoteModel;
 import com.example.yura.todolist.mvvm.model.mapper.NoteModelDataMapper;
 
-import java.text.ParseException;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.UUID;
@@ -35,10 +34,11 @@ public class AddEditNoteViewModel extends ViewModel {
     public MutableLiveData<View.OnClickListener> onChangeEndDateClickListener=new MutableLiveData<>();
     public MutableLiveData<String> edit_date=new MutableLiveData<>();
     public MutableLiveData<String> end_date=new MutableLiveData<>();
+    public MutableLiveData<View.OnClickListener> saveChangeClickListener=new MutableLiveData<>();
     private NoteModelDataMapper noteModelDataMapper;
     private NoteModel noteModel;
 
-    public AddEditNoteViewModel(NotesRepository notesRepository, String noteId) throws ParseException {
+    public AddEditNoteViewModel(NotesRepository notesRepository, String noteId) throws DataUnavailableException {
         this.notesRepository = notesRepository;
         noteModelDataMapper=new NoteModelDataMapper();
         if (noteId == null) {
@@ -69,6 +69,10 @@ public class AddEditNoteViewModel extends ViewModel {
                 }
             }
         });
+        setViewModelClickListeners();
+    }
+
+    private void setViewModelClickListeners() {
         onLowProirityClickListener.postValue(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -95,7 +99,7 @@ public class AddEditNoteViewModel extends ViewModel {
         });
     }
 
-    public void doNoteOperation() throws ParseException {
+    public void doNoteOperation() {
         DateMapper dateMapper = new DateMapper();
         String current_date=dateMapper.transformFromDate(new Date());
         if (noteModel==null){
@@ -119,11 +123,11 @@ public class AddEditNoteViewModel extends ViewModel {
         }
     }
 
-    public void addNewNote(NoteModel noteModel) throws ParseException {
+    private void addNewNote(NoteModel noteModel) {
         notesRepository.addNote(noteModelDataMapper.transformFrom(noteModel));
     }
 
-    public void editNote(NoteModel noteModel) throws ParseException {
+    private void editNote(NoteModel noteModel) {
         notesRepository.editNote(noteModelDataMapper.transformFrom(noteModel));
     }
 
@@ -131,7 +135,7 @@ public class AddEditNoteViewModel extends ViewModel {
         title.postValue(newTitle);
     }
 
-    public void DateDialog(View view) {
+    private void DateDialog(View view) {
         DatePickerDialog.OnDateSetListener listener = new DatePickerDialog.OnDateSetListener() {
             @Override
             public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {

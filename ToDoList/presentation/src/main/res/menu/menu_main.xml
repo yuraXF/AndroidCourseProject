@@ -1,7 +1,7 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:context="com.example.yura.todolist.mvvm.view.activity.MainActivity">
+    tools:context=".mvvm.view.screen.note_list.activity.MainActivity">
     <item android:title="Сортировать по">
         <menu>
             <item
@@ -18,6 +18,11 @@
                 android:title="Дате завершения" />
         </menu>
     </item>
+    <item
+        android:id="@+id/action_statistic"
+        android:orderInCategory="100"
+        android:title="Статистика"
+        app:showAsAction="never" />
     <item
         android:id="@+id/action_exit"
         android:orderInCategory="100"

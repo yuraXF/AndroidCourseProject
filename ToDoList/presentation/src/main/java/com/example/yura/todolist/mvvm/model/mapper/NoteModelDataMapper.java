@@ -1,7 +1,7 @@
 package com.example.yura.todolist.mvvm.model.mapper;
 
-import com.example.data.entity.mapper.DateMapper;
-import com.example.domain.Note;
+import com.example.data.mapper.DateMapper;
+import com.example.domain.model.Note;
 import com.example.yura.todolist.mvvm.model.NoteModel;
 
 import java.text.ParseException;
@@ -50,7 +50,7 @@ public class NoteModelDataMapper {
         return noteModelCollection;
     }
 
-    public Note transformFrom(NoteModel noteModel) throws ParseException {
+    public Note transformFrom(NoteModel noteModel) {
         if (noteModel == null) {
             throw new IllegalArgumentException("Cannot transform a null value");
         }
@@ -58,16 +58,24 @@ public class NoteModelDataMapper {
         note.setPriority(noteModel.getPriority());
         note.setDescription(noteModel.getDescription());
         note.setTitle(noteModel.getTitle());
-        note.setEditDate(dateMapper.transformToDate(noteModel.getEditDate()));
+        try {
+            note.setEditDate(dateMapper.transformToDate(noteModel.getEditDate()));
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
         if (!noteModel.getEndDate().isEmpty()) {
-            note.setEndDate(dateMapper.transformToDate(noteModel.getEndDate()));
+            try {
+                note.setEndDate(dateMapper.transformToDate(noteModel.getEndDate()));
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
         }else{
             note.setEndDate(new Date(0));
         }
         return note;
     }
 
-    public Collection<Note> transformFrom(Collection<NoteModel> noteModelCollection) throws ParseException {
+    public Collection<Note> transformFrom(Collection<NoteModel> noteModelCollection) {
         Collection<Note> noteCollection;
         if(noteModelCollection!=null && !noteModelCollection.isEmpty()){
             noteCollection=new ArrayList<>();

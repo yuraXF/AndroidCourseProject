@@ -1,5 +1,7 @@
 package com.example.yura.todolist.mvvm.viewmodel;
 
+import javax.inject.Inject;
+
 import androidx.annotation.NonNull;
 import androidx.lifecycle.ViewModel;
 import androidx.lifecycle.ViewModelProvider;

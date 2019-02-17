@@ -1,14 +1,14 @@
 package com.example.domain.repository;
 
-import com.example.domain.Note;
+import com.example.domain.model.Note;
+import com.example.domain.exceptions.DataUnavailableException;
 
-import java.text.ParseException;
 import java.util.List;
 
 public interface NotesRepository {
-    List<Note> getNotes() throws ParseException;
+    List<Note> getNotes() throws DataUnavailableException;
     void addNote(Note note);
     void removeNote(String id);
     void editNote(Note note);
-    Note getNoteById(String id) throws ParseException;
+    Note getNoteById(String id) throws DataUnavailableException;
 }

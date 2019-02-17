@@ -46,7 +46,6 @@
                         android:text="Заголовок:" />
 
                     <androidx.appcompat.widget.AppCompatEditText
-                        android:id="@+id/et_title"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_margin="10dp"
@@ -66,7 +65,6 @@
                         android:text="Описание:" />
 
                     <androidx.appcompat.widget.AppCompatEditText
-                        android:id="@+id/et_description"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_margin="10dp"
@@ -86,7 +84,6 @@
                         android:text="Изменена:" />
 
                     <androidx.appcompat.widget.AppCompatEditText
-                        android:id="@+id/et_edit_date"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_margin="10dp"
@@ -108,7 +105,6 @@
                         android:text="Завершена:" />
 
                     <androidx.appcompat.widget.AppCompatEditText
-                        android:id="@+id/et_end_date"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_margin="10dp"
@@ -130,8 +126,7 @@
                         android:layout_margin="10dp"
                         android:text="Приоритет:" />
 
-                    <com.example.yura.todolist.mvvm.view.component.MyView
-                        android:id="@+id/myview_priority"
+                    <com.example.yura.todolist.mvvm.view.widget.MyView
                         android:layout_width="24dp"
                         android:layout_height="24dp"
                         android:layout_margin="10dp"
@@ -144,7 +139,6 @@
                     android:orientation="horizontal">
 
                     <androidx.appcompat.widget.AppCompatButton
-                        android:id="@+id/btn_low"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_margin="10dp"
@@ -153,7 +147,6 @@
                         android:onClickListener="@{vm.onLowProirityClickListener}"/>
 
                     <androidx.appcompat.widget.AppCompatButton
-                        android:id="@+id/btn_middle"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_margin="10dp"
@@ -162,7 +155,6 @@
                         android:onClickListener="@{vm.onMiddleProirityClickListener}"/>
 
                     <Button
-                        android:id="@+id/btn_high"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_margin="10dp"
@@ -176,12 +168,12 @@
         </androidx.constraintlayout.widget.ConstraintLayout>
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
-            android:id="@+id/fab"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="bottom|end"
             android:layout_margin="@dimen/fab_margin"
-            android:src="@drawable/ic_save_black_24dp"/>
+            android:src="@drawable/ic_save_black_24dp"
+            android:onClick="@{vm.saveChangeClickListener}"/>
 
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
 </layout>
