@@ -9,7 +9,7 @@ import com.example.yura.todolist.mvvm.view.screen.note_list.fragment.ShowNoteFra
 import com.example.yura.todolist.mvvm.viewmodel.Event;
 import com.example.yura.todolist.mvvm.viewmodel.MainScreenViewModel;
 import com.example.yura.todolist.mvvm.viewmodel.MainScreenViewModelFactory;
-import com.example.yura.todolist.mvvm.viewmodel.Nothing;
+import com.example.domain.model.Nothing;
 
 import javax.inject.Inject;
 

@@ -23,7 +23,11 @@ public class NoteInteractor {
 
     public ArrayList<Note> getNotes(SortType sortType) throws DataUnavailableException {
         ArrayList<Note> notes=(ArrayList<Note>) notesRepository.getNotes();
-        return sortOperations.doSorting(notes ,sortType);
+        if (notes!=null) {
+            return sortOperations.doSorting(notes, sortType);
+        }else{
+            return null;
+        }
     }
 
     public void removeNote(String id){

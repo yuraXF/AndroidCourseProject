@@ -1,6 +1,7 @@
 package com.example.yura.todolist.mvvm.viewmodel;
 
 import com.example.domain.exceptions.DataUnavailableException;
+import com.example.domain.model.Nothing;
 import com.example.domain.model.SortType;
 import com.example.domain.usecase.NoteInteractor;
 import com.example.yura.todolist.mvvm.model.NoteModel;
@@ -23,7 +24,7 @@ public class MainScreenViewModel extends ViewModel {
     @Inject
     public MainScreenViewModel(NoteInteractor noteInteractor) {
         this.noteInteractor = noteInteractor;
-        sortTypeValue=SortType.PRIORITY;
+        sortTypeValue = SortType.PRIORITY;
         attachNotes();
     }
 

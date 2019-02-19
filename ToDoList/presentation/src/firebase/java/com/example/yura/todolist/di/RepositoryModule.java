@@ -1,8 +1,8 @@
-package com.example.yura.todolist;
+package com.example.yura.todolist.di;
 
-import android.content.Context;
-
-import com.example.repository.SqLiteNoteRepositoryImpl;
+import com.example.data_firebase.repository.FirebaseAuthRepositoryImpl;
+import com.example.data_firebase.repository.FirebaseNoteRepositoryImpl;
+import com.example.domain.repository.AuthRepository;
 import com.example.domain.repository.NotesRepository;
 
 import dagger.Module;
@@ -12,8 +12,13 @@ import dagger.Provides;
 public class RepositoryModule {
 
     @Provides
-    NotesRepository provideNotesRepository(Context context) {
-        return new SqLiteNoteRepositoryImpl(context);
+    NotesRepository provideNotesRepository() {
+        return new FirebaseNoteRepositoryImpl();
+    }
+
+    @Provides
+    AuthRepository provideAuthRepository(){
+        return new FirebaseAuthRepositoryImpl();
     }
 
 }
